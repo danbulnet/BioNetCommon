@@ -37,3 +37,18 @@ end
     @test distance(d1, d2) == ddiff
     @test distance(d2, d1) == ddiff
 end
+
+@testset "statqualia" begin
+    @test statqualia(Any) === Categorical()
+    @test statqualia(Nothing) === Categorical()
+    @test statqualia(Bool) === Categorical()
+    @test statqualia(String) === Categorical()
+    @test statqualia(Char) === Categorical()
+    @test statqualia(Date) === Ordinal()
+    @test statqualia(DateTime) === Ordinal()
+    @test statqualia(Rational) === Numerical()
+    @test statqualia(Complex) === Numerical()
+    @test statqualia(Irrational) === Numerical()
+    @test statqualia(Float64) === Numerical()
+    @test statqualia(Int) === Numerical()
+end
