@@ -1,5 +1,5 @@
 module BioNetCommon
 
-greet() = print("Hello World!")
+include("distances.jl")
 
 end # module BioNetCommon
