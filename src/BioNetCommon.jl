@@ -1,9 +1,9 @@
 module BioNetCommon
 
-include("data/Data.jl")
-include("connection/Connection.jl")
-include("neuron/Neuron.jl")
-include("utils/Utils.jl")
+include("Data/Data.jl")
+include("Connection/Connection.jl")
+include("Neuron/Neuron.jl")
+include("Utils/Utils.jl")
 
 using Reexport
 @reexport using BioNetCommon.Data
@@ -11,4 +11,4 @@ using Reexport
 @reexport using BioNetCommon.Neuron
 @reexport using BioNetCommon.Utils
 
-end # module BioNetCommon
+end
