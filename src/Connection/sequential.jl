@@ -1,8 +1,8 @@
 export WeightedSequentialConnection
 
-import BioNetCommon.Neuron: AnyNeuron, ConnectionID
+import BioNetCommon.Data: AnyNeuron, ConnectionID
 
-struct WeightedSequentialConnection <: DefiningConnection 
+mutable struct WeightedSequentialConnection <: DefiningConnection 
     from::AnyNeuron
     to::AnyNeuron
     weight::Float32

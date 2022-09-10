@@ -1,21 +1,13 @@
 module Connection
 
-export AnyConnection
 export DefiningConnection
 export SimilarityConnection
 export InhibitoryConnection
 export SequentialConnection
-export ConnectionID
 export from, to, id, weight, kind
 
-import BioNetCommon.Neuron: AnyNeuron, NeuronID
+import BioNetCommon.Data: AnyConnection, AnyNeuron, NeuronID, ConnectionID
 
-struct ConnectionID
-    from::NeuronID
-    to::NeuronID
-end
-
-abstract type AnyConnection end
 abstract type DefiningConnection <: AnyConnection end
 abstract type SimilarityConnection <: AnyConnection end
 abstract type InhibitoryConnection <: AnyConnection end
@@ -55,5 +47,12 @@ kind(connection::DefiningConnection)::ConnectionKind = ConnectionKind::Defining
 kind(connection::SimilarityConnection)::ConnectionKind = ConnectionKind::Similarity
 kind(connection::InhibitoryConnection)::ConnectionKind = ConnectionKind::Inhibitory
 kind(connection::SequentialConnection)::ConnectionKind = ConnectionKind::Sequential
+
+function Base.show(io::IO, connection::AnyConnection)
+    println(
+        name(connection.from), " => ", name(connection.to), 
+        " [w:", round.(connection.weight; digits=5), "]"
+    )
+end
 
 end

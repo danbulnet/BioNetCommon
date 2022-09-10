@@ -1,6 +1,6 @@
 export SimpleDefiningConnection, WeightedDefiningConnection
 
-import BioNetCommon.Neuron: AnyNeuron, ConnectionID
+import BioNetCommon.Data: AnyNeuron, ConnectionID
 
 struct SimpleDefiningConnection <: DefiningConnection 
     from::AnyNeuron
@@ -19,7 +19,7 @@ function weight(connection::SimpleDefiningConnection)::AnyNeuron
     1.0f0 / counter(from(connection))
 end
 
-struct WeightedDefiningConnection <: DefiningConnection 
+mutable struct WeightedDefiningConnection <: DefiningConnection 
     from::AnyNeuron
     to::AnyNeuron
     weight::Float32

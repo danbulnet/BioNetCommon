@@ -1,4 +1,6 @@
 module Data
-    include("distances.jl")
+    include("any.jl")
+    include("distance.jl")
+    include("id.jl")
     include("statqualia.jl")
 end

@@ -1,17 +1,14 @@
 module Neuron
 
-export AnyNeuron, NeuronID
-export id, counter
+export NeuronState
 
-struct NeuronID
-    name::Symbol
-    parent::Symbol
+import BioNetCommon.Data: AnyConnection, AnyNeuron, NeuronID, ConnectionID
+
+@enum NeuronState begin
+    active
+    inactive
 end
 
-abstract type AnyNeuron end
-
-id(neuron::AnyNeuron) = "todo" # TODO
-
-counter(neuron::AnyNeuron) = 1 # TODO
+include("simple.jl")
 
 end

@@ -7,7 +7,7 @@ using BioNetCommon
     @test BioNetCommon isa Module
 end
 
-@testset "distances" begin
+@testset "Data.distances" begin
     @test distance(1, 2) == 1.0f0
     @test distance(2, 1) == 1.0f0
     @test distance(2.0, 1.0) == 1.0f0
@@ -38,7 +38,7 @@ end
     @test distance(d2, d1) == ddiff
 end
 
-@testset "statqualia" begin
+@testset "Data.statqualia" begin
     @test statqualia(Any) === Categorical()
     @test statqualia(Nothing) === Categorical()
     @test statqualia(Bool) === Categorical()
@@ -51,4 +51,12 @@ end
     @test statqualia(Irrational) === Numerical()
     @test statqualia(Float64) === Numerical()
     @test statqualia(Int) === Numerical()
+end
+
+@testset "Connectoin" begin
+    # @test from(AnyConnection)
+end
+
+@testset "Neuron" begin
+    # @test from(AnyConnection)
 end

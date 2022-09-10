@@ -1,8 +1,8 @@
 export WeightedInhibitoryConnection
 
-import BioNetCommon.Neuron: AnyNeuron, ConnectionID
+import BioNetCommon.Data: AnyNeuron, ConnectionID
 
-struct WeightedInhibitoryConnection <: DefiningConnection 
+mutable struct WeightedInhibitoryConnection <: DefiningConnection 
     from::AnyNeuron
     to::AnyNeuron
     weight::Float32
