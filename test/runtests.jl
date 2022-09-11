@@ -53,7 +53,7 @@ end
     @test statqualia(Int) === Numerical()
 end
 
-@testset "Connectoin" begin
+@testset "Connection" begin
     # @test from(AnyConnection)
 end
 

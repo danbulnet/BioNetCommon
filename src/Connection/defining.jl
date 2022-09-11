@@ -1,21 +1,26 @@
-export SimpleDefiningConnection, WeightedDefiningConnection
+export DefiningConnection, SimpleDefiningConnection, WeightedDefiningConnection
 
 import BioNetCore.Data: AnyNeuron, ConnectionID
+import BioNetCore.Connection
+
+abstract type DefiningConnection <: AnyConnection end
+
+Connection.kind(connection::DefiningConnection)::ConnectionKind = ConnectionKind::Defining
 
 struct SimpleDefiningConnection <: DefiningConnection 
     from::AnyNeuron
     to::AnyNeuron
 end
 
-from(connection::SimpleDefiningConnection)::AnyNeuron = connection.from
+Connection.from(connection::SimpleDefiningConnection)::AnyNeuron = connection.from
 
-to(connection::SimpleDefiningConnection)::AnyNeuron = connection.to
+Connection.to(connection::SimpleDefiningConnection)::AnyNeuron = connection.to
 
-function id(connection::SimpleDefiningConnection)::ConnectionID
+function Connection.id(connection::SimpleDefiningConnection)::ConnectionID
     ConnectionID(id(from(connection)), id(to(connection)))
 end
 
-function weight(connection::SimpleDefiningConnection)::AnyNeuron
+function Connection.weight(connection::SimpleDefiningConnection)::AnyNeuron
     1.0f0 / counter(from(connection))
 end
 
@@ -25,12 +30,12 @@ mutable struct WeightedDefiningConnection <: DefiningConnection
     weight::Float32
 end
 
-from(connection::WeightedDefiningConnection)::AnyNeuron = connection.from
+Connection.from(connection::WeightedDefiningConnection)::AnyNeuron = connection.from
 
-to(connection::WeightedDefiningConnection)::AnyNeuron = connection.to
+Connection.to(connection::WeightedDefiningConnection)::AnyNeuron = connection.to
 
-function id(connection::WeightedDefiningConnection)::ConnectionID
+function Connection.id(connection::WeightedDefiningConnection)::ConnectionID
     ConnectionID(id(from(connection)), id(to(connection)))
 end
 
-weight(connection::WeightedDefiningConnection)::AnyNeuron = connection.weight
+Connection.weight(connection::WeightedDefiningConnection)::AnyNeuron = connection.weight

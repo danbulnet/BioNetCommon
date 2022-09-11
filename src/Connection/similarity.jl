@@ -1,6 +1,10 @@
-export SimpleSimilarityConnection, WeightedSimilarityConnection
+export SimilarityConnection, SimpleSimilarityConnection, WeightedSimilarityConnection
 
 import BioNetCore.Data: AnyNeuron, ConnectionID
+
+abstract type SimilarityConnection <: AnyConnection end
+
+Connection.kind(connection::SimilarityConnection)::ConnectionKind = ConnectionKind::Similarity
 
 mutable struct WeightedSimilarityConnection <: DefiningConnection 
     from::AnyNeuron
@@ -8,12 +12,12 @@ mutable struct WeightedSimilarityConnection <: DefiningConnection
     weight::Float32
 end
 
-from(connection::WeightedSimilarityConnection)::AnyNeuron = connection.from
+Connection.from(connection::WeightedSimilarityConnection)::AnyNeuron = connection.from
 
-to(connection::WeightedSimilarityConnection)::AnyNeuron = connection.to
+Connection.to(connection::WeightedSimilarityConnection)::AnyNeuron = connection.to
 
-function id(connection::WeightedSimilarityConnection)::ConnectionID
+function Connection.id(connection::WeightedSimilarityConnection)::ConnectionID
     ConnectionID(id(from(connection)), id(to(connection)))
 end
 
-weight(connection::WeightedSimilarityConnection)::AnyNeuron = connection.weight
+Connection.weight(connection::WeightedSimilarityConnection)::AnyNeuron = connection.weight

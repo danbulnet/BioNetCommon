@@ -1,6 +1,10 @@
-export WeightedSequentialConnection
+export SequentialConnection, WeightedSequentialConnection
 
 import BioNetCore.Data: AnyNeuron, ConnectionID
+
+abstract type SequentialConnection <: AnyConnection end
+
+Connection.kind(connection::SequentialConnection)::ConnectionKind = ConnectionKind::Sequential
 
 mutable struct WeightedSequentialConnection <: DefiningConnection 
     from::AnyNeuron
@@ -8,12 +12,12 @@ mutable struct WeightedSequentialConnection <: DefiningConnection
     weight::Float32
 end
 
-from(connection::WeightedSequentialConnection)::AnyNeuron = connection.from
+Connection.from(connection::WeightedSequentialConnection)::AnyNeuron = connection.from
 
-to(connection::WeightedSequentialConnection)::AnyNeuron = connection.to
+Connection.to(connection::WeightedSequentialConnection)::AnyNeuron = connection.to
 
-function id(connection::WeightedSequentialConnection)::ConnectionID
+function Connection.id(connection::WeightedSequentialConnection)::ConnectionID
     ConnectionID(id(from(connection)), id(to(connection)))
 end
 
-weight(connection::WeightedSequentialConnection)::AnyNeuron = connection.weight
+Connection.weight(connection::WeightedSequentialConnection)::AnyNeuron = connection.weight

@@ -1,6 +1,10 @@
-export WeightedInhibitoryConnection
+export InhibitoryConnection, WeightedInhibitoryConnection
 
 import BioNetCore.Data: AnyNeuron, ConnectionID
+
+abstract type InhibitoryConnection <: AnyConnection end
+
+Connection.kind(connection::InhibitoryConnection)::ConnectionKind = ConnectionKind::Inhibitory
 
 mutable struct WeightedInhibitoryConnection <: DefiningConnection 
     from::AnyNeuron
@@ -8,12 +12,12 @@ mutable struct WeightedInhibitoryConnection <: DefiningConnection
     weight::Float32
 end
 
-from(connection::WeightedInhibitoryConnection)::AnyNeuron = connection.from
+Connection.from(connection::WeightedInhibitoryConnection)::AnyNeuron = connection.from
 
-to(connection::WeightedInhibitoryConnection)::AnyNeuron = connection.to
+Connection.to(connection::WeightedInhibitoryConnection)::AnyNeuron = connection.to
 
-function id(connection::WeightedInhibitoryConnection)::ConnectionID
+function Connection.id(connection::WeightedInhibitoryConnection)::ConnectionID
     ConnectionID(id(from(connection)), id(to(connection)))
 end
 
-weight(connection::WeightedInhibitoryConnection)::AnyNeuron = connection.weight
+Connection.weight(connection::WeightedInhibitoryConnection)::AnyNeuron = connection.weight
