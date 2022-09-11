@@ -62,4 +62,8 @@ end
     neuron2 = SimpleNeuron(:n2, :test)
 
     @test id(neuron1) == NeuronID(:n1, :test)
+    @test id(neuron2) == NeuronID(:n2, :test)
+
+    @test issensor(neuron1) == false
+    @test issensor(neuron2) == false
 end
