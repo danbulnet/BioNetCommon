@@ -1,6 +1,7 @@
 export id, issensor, activation, counter
 export definedneurons, definingneurons, definingsensors
 export activate!, explain, explainone, deactivate!
+export connectto!, connectfrom!
 
 import BioNetCore.Abstraction: AnyConnection, AnyNeuron
 import BioNetCore.ID: NeuronID
@@ -58,6 +59,14 @@ function deactivate!(
     _spreadvertical::Bool
 )::Nothing
     error("no deactivate!(neuron, ...) implementation for $(typeof(neuron))")
+end
+
+function connectto!(neuron::AnyNeuron, _to::AnyNeuron)::AnyConnection
+    error("no connectto!(neuron, ...) implementation for $(typeof(neuron))")
+end
+
+function connectfrom!(neuron::AnyNeuron, _from::AnyNeuron)::AnyConnection
+    error("no connectfrom!(neuron, ...) implementation for $(typeof(neuron))")
 end
 
 function Base.show(io::IO, neuron::AnyNeuron)
