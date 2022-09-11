@@ -2,7 +2,7 @@ module Neuron
 
 export NeuronState
 
-import BioNetCore.Data: AnyNeuron, NeuronID
+import BioNetCore.Data: AnyNeuron, AnySensor, NeuronID
 
 @enum NeuronState begin
     active
@@ -35,17 +35,35 @@ function definingneurons(neuron::AnyNeuron)::Dict{NeuronID, AnyNeuron}
     error("no definingneurons(neuron) implementation for $(typeof(neuron))")
 end
 
-function definingsensors(neuron::AnyNeuron)::Dict{NeuronID, AnyNeuron}
+function definingsensors(neuron::AnyNeuron)::Dict{NeuronID, AnySensor}
     error("no definingsensors(neuron) implementation for $(typeof(neuron))")
 end
 
-function activate(
+function activate!(
     neuron::AnyNeuron, 
     _signal::Float32, 
     _spreadhorizonal::Bool, 
     _spreadvertical::Bool
 )::Dict{NeuronID, AnyNeuron}
-    error("no activate(neuron, ...) implementation for $(typeof(neuron))")
+    error("no activate!(neuron, ...) implementation for $(typeof(neuron))")
+end
+
+function explain(neuron::SimpleNeuron)::Dict{NeuronID, AnySensor}
+    error("no explain(neuron) implementation for $(typeof(neuron))")
+end
+
+function explainone(
+    neuron::SimpleNeuron, _sensorname::Symbol
+)::Union{AnySensor, Nothing}
+    error("no explainone(neuron, ...) implementation for $(typeof(neuron))")
+end
+
+function deactivate!(
+    neuron::SimpleNeuron, 
+    _spreadhorizonal::Bool, 
+    _spreadvertical::Bool
+)::Nothing
+    error("no deactivate!(neuron, ...) implementation for $(typeof(neuron))")
 end
 
 function Base.show(io::IO, neuron::AnyNeuron)

@@ -1,6 +1,6 @@
 export SimpleNeuron
 
-import BioNetCore.Data: NeuronID, ConnectionID
+import BioNetCore.Data: AnyNeuron, AnySensor, NeuronID, ConnectionID
 import BioNetCore.Connection: SimpleDefiningConnection
 
 mutable struct SimpleNeuron
@@ -46,8 +46,8 @@ function definingneurons(neuron::SimpleNeuron)::Dict{NeuronID, AnyNeuron}
     )
 end
 
-function definingsensors(neuron::SimpleNeuron)::Dict{NeuronID, AnyNeuron}
-    Dict{NeuronID, AnyNeuron}(
+function definingsensors(neuron::SimpleNeuron)::Dict{NeuronID, AnySensor}
+    Dict{NeuronID, AnySensor}(
         map(
             x -> id(x) => x, filter(
                 x -> issensor(x), map(
@@ -58,7 +58,7 @@ function definingsensors(neuron::SimpleNeuron)::Dict{NeuronID, AnyNeuron}
     )
 end
 
-function activate(
+function activate!(
     neuron::SimpleNeuron, 
     signal::Float32, 
     spreadhorizonal::Bool, 
@@ -72,10 +72,39 @@ function activate(
         for definedneuron in values(defined)
             defined = merge!(
                 defined, 
-                activate(definedneuron, signal, spreadhorizonal, spreadvertical)
+                activate!(definedneuron, signal, spreadhorizonal, spreadvertical)
             )
         end
     end
 
     defined
+end
+
+function explain(neuron::SimpleNeuron)::Dict{NeuronID, AnySensor}
+    definingsensors(neuron)
+end
+
+function explainone(
+    neuron::SimpleNeuron, sensorname::Symbol
+)::Union{AnySensor, Nothing}
+    for (id, sensor) in definingsensors(neuron)
+        if parent(id) == sensorname
+            return sensor
+        end
+    end
+    nothing
+end
+
+function deactivate!(
+    neuron::SimpleNeuron, 
+    spreadhorizonal::Bool, 
+    spreadvertical::Bool
+)::Nothing
+    neuron.activation = 0.0f0
+    if spreadvertical
+        for definedneuron in values(definedneurons(neuron))
+            deactivate!(definedneuron, spreadhorizonal, spreadvertical)
+        end
+    end
+    nothing
 end
