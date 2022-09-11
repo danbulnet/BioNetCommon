@@ -3,6 +3,7 @@ module Inhibitory
 export WeightedInhibitoryConnection
 
 import BioNetCore.Abstraction: AnyNeuron, AnyInhibitoryConnection
+import BioNetCore.ID
 import BioNetCore.ID: ConnectionID
 import BioNetCore.Connection
 
@@ -20,7 +21,7 @@ Connection.from(connection::WeightedInhibitoryConnection)::AnyNeuron = connectio
 
 Connection.to(connection::WeightedInhibitoryConnection)::AnyNeuron = connection.to
 
-function Connection.id(connection::WeightedInhibitoryConnection)::ConnectionID
+function ID.id(connection::WeightedInhibitoryConnection)::ConnectionID
     ConnectionID(id(from(connection)), id(to(connection)))
 end
 

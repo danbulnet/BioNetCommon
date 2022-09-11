@@ -3,6 +3,7 @@ module Similarity
 export WeightedSimilarityConnection
 
 import BioNetCore.Abstraction: AnyNeuron, AnySimilarityConnection
+import BioNetCore.ID
 import BioNetCore.ID: ConnectionID
 import BioNetCore.Connection
 
@@ -20,7 +21,7 @@ Connection.from(connection::WeightedSimilarityConnection)::AnyNeuron = connectio
 
 Connection.to(connection::WeightedSimilarityConnection)::AnyNeuron = connection.to
 
-function Connection.id(connection::WeightedSimilarityConnection)::ConnectionID
+function ID.id(connection::WeightedSimilarityConnection)::ConnectionID
     ConnectionID(id(from(connection)), id(to(connection)))
 end
 

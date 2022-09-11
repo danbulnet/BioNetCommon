@@ -1,14 +1,10 @@
-export id, issensor, activation, counter
+export issensor, activation, counter
 export definedneurons, definingneurons, definingsensors
 export activate!, explain, explainone, deactivate!
 export define!, defineto!, definefrom!
 
 import BioNetCore.Abstraction: AnyConnection, AnyNeuron
 import BioNetCore.ID: NeuronID
-
-function id(neuron::AnyNeuron)::NeuronID
-    error("no id(neuron) implementation for $(typeof(neuron))")
-end
 
 function issensor(neuron::AnyNeuron)::Bool
     error("no issensor(neuron) implementation for $(typeof(neuron))")

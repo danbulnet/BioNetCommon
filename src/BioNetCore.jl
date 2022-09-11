@@ -11,6 +11,11 @@ using Reexport
 @reexport using BioNetCore.ID
 @reexport using BioNetCore.Data
 @reexport using BioNetCore.Connection
+@reexport using BioNetCore.Connection.Defining
+@reexport using BioNetCore.Connection.Inhibitory
+@reexport using BioNetCore.Connection.Similarity
+@reexport using BioNetCore.Connection.Sequential
 @reexport using BioNetCore.Neuron
+@reexport using BioNetCore.Neuron.Simple
 
 end

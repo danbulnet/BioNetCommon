@@ -1,4 +1,4 @@
-export from, to, id, weight, kind
+export from, to, weight, kind
 
 import BioNetCore.Abstraction: AnyConnection, AnyNeuron
 import BioNetCore.ID: ConnectionID
@@ -9,10 +9,6 @@ end
 
 function to(connection::AnyConnection)::AnyNeuron
     error("no to(connection) implementation for $(typeof(connection))")
-end
-
-function id(connection::AnyConnection)::ConnectionID
-    error("no id(connection) implementation for $(typeof(connection))")
 end
 
 function weight(connection::AnyConnection)::Float32

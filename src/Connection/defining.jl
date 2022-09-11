@@ -3,6 +3,7 @@ module Defining
 export SimpleDefiningConnection, WeightedDefiningConnection
 
 import BioNetCore.Abstraction: AnyNeuron, AnyDefiningConnection
+import BioNetCore.ID
 import BioNetCore.ID: ConnectionID
 import BioNetCore.Connection
 
@@ -19,7 +20,7 @@ Connection.from(connection::SimpleDefiningConnection)::AnyNeuron = connection.fr
 
 Connection.to(connection::SimpleDefiningConnection)::AnyNeuron = connection.to
 
-function Connection.id(connection::SimpleDefiningConnection)::ConnectionID
+function ID.id(connection::SimpleDefiningConnection)::ConnectionID
     ConnectionID(id(from(connection)), id(to(connection)))
 end
 

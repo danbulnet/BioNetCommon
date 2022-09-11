@@ -58,5 +58,8 @@ end
 end
 
 @testset "Neuron" begin
-    # @test from(AnyConnection)
+    neuron1 = SimpleNeuron(:n1, :test)
+    neuron2 = SimpleNeuron(:n2, :test)
+
+    @test id(neuron1) == NeuronID(:n1, :test)
 end

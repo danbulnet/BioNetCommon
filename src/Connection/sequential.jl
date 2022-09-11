@@ -3,6 +3,7 @@ module Sequential
 export WeightedSequentialConnection
 
 import BioNetCore.Abstraction: AnyNeuron, AnySequentialConnection
+import BioNetCore.ID
 import BioNetCore.ID: ConnectionID
 import BioNetCore.Connection
 
@@ -20,7 +21,7 @@ Connection.from(connection::WeightedSequentialConnection)::AnyNeuron = connectio
 
 Connection.to(connection::WeightedSequentialConnection)::AnyNeuron = connection.to
 
-function Connection.id(connection::WeightedSequentialConnection)::ConnectionID
+function ID.id(connection::WeightedSequentialConnection)::ConnectionID
     ConnectionID(id(from(connection)), id(to(connection)))
 end
 

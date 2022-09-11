@@ -4,6 +4,7 @@ export SimpleNeuron
 
 import BioNetCore.Abstraction: AnyNeuron, AnySensor
 import BioNetCore.Connection.Defining: SimpleDefiningConnection
+import BioNetCore.ID
 import BioNetCore.ID: NeuronID, ConnectionID
 import BioNetCore.Neuron
 
@@ -18,7 +19,7 @@ mutable struct SimpleNeuron
     end
 end
 
-Neuron.id(neuron::SimpleNeuron)::NeuronID = neuron.id
+ID.id(neuron::SimpleNeuron)::NeuronID = neuron.id
 
 Neuron.issensor(neuron::SimpleNeuron)::Bool = false
 
