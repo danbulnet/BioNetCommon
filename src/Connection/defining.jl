@@ -38,7 +38,7 @@ Connection.from(connection::WeightedDefiningConnection)::AnyNeuron = connection.
 
 Connection.to(connection::WeightedDefiningConnection)::AnyNeuron = connection.to
 
-function Connection.id(connection::WeightedDefiningConnection)::ConnectionID
+function ID.id(connection::WeightedDefiningConnection)::ConnectionID
     ConnectionID(id(from(connection)), id(to(connection)))
 end
 
