@@ -1,8 +1,8 @@
 export ConnectionKind
 
 @enum ConnectionKind begin
-    Defining
-    Similarity
-    Inhibitory
-    Sequential
+    DefiningConnectionKind
+    SimilarityConnectionKind
+    InhibitoryConnectionKind
+    SequentialConnectionKind
 end

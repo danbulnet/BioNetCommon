@@ -1,3 +1,5 @@
+module Inhibitory
+
 export WeightedInhibitoryConnection
 
 import BioNetCore.Abstraction: AnyNeuron, AnyInhibitoryConnection
@@ -5,7 +7,7 @@ import BioNetCore.ID: ConnectionID
 import BioNetCore.Connection
 
 function Connection.kind(_connection::AnyInhibitoryConnection)::ConnectionKind
-    ConnectionKind::Inhibitory
+    ConnectionKind::InhibitoryConnectionKind
 end
 
 mutable struct WeightedInhibitoryConnection <: AnyInhibitoryConnection 
@@ -23,3 +25,5 @@ function Connection.id(connection::WeightedInhibitoryConnection)::ConnectionID
 end
 
 Connection.weight(connection::WeightedInhibitoryConnection)::AnyNeuron = connection.weight
+
+end

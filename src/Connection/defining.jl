@@ -1,3 +1,5 @@
+module Defining
+
 export SimpleDefiningConnection, WeightedDefiningConnection
 
 import BioNetCore.Abstraction: AnyNeuron, AnyDefiningConnection
@@ -5,7 +7,7 @@ import BioNetCore.ID: ConnectionID
 import BioNetCore.Connection
 
 function Connection.kind(_connection::AnyDefiningConnection)::ConnectionKind
-    ConnectionKind::Defining
+    ConnectionKind::DefiningConnectionKind
 end
 
 struct SimpleDefiningConnection <: AnyDefiningConnection 
@@ -40,3 +42,5 @@ function Connection.id(connection::WeightedDefiningConnection)::ConnectionID
 end
 
 Connection.weight(connection::WeightedDefiningConnection)::AnyNeuron = connection.weight
+
+end

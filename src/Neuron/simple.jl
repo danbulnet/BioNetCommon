@@ -3,7 +3,7 @@ module Simple
 export SimpleNeuron
 
 import BioNetCore.Abstraction: AnyNeuron, AnySensor
-import BioNetCore.Connection: SimpleDefiningConnection
+import BioNetCore.Connection.Defining: SimpleDefiningConnection
 import BioNetCore.ID: NeuronID, ConnectionID
 import BioNetCore.Neuron
 

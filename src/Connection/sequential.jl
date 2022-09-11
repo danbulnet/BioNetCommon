@@ -1,3 +1,5 @@
+module Sequential
+
 export WeightedSequentialConnection
 
 import BioNetCore.Abstraction: AnyNeuron, AnySequentialConnection
@@ -5,7 +7,7 @@ import BioNetCore.ID: ConnectionID
 import BioNetCore.Connection
 
 function Connection.kind(_connection::AnySequentialConnection)::ConnectionKind
-    ConnectionKind::Sequential
+    ConnectionKind::SequentialConnectionKind
 end
 
 mutable struct WeightedSequentialConnection <: AnySequentialConnection 
@@ -23,3 +25,5 @@ function Connection.id(connection::WeightedSequentialConnection)::ConnectionID
 end
 
 Connection.weight(connection::WeightedSequentialConnection)::AnyNeuron = connection.weight
+
+end
