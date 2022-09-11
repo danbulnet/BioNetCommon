@@ -1,7 +1,10 @@
+module Simple
+
 export SimpleNeuron
 
 import BioNetCore.Data: AnyNeuron, AnySensor, NeuronID, ConnectionID
 import BioNetCore.Connection: SimpleDefiningConnection
+import BioNetCore.Neuron
 
 mutable struct SimpleNeuron
     id::NeuronID
@@ -14,15 +17,15 @@ mutable struct SimpleNeuron
     end
 end
 
-id(neuron::SimpleNeuron)::NeuronID = neuron.id
+Neuron.id(neuron::SimpleNeuron)::NeuronID = neuron.id
 
-issensor(neuron::SimpleNeuron)::Bool = false
+Neuron.issensor(neuron::SimpleNeuron)::Bool = false
 
-activation(neuron::SimpleNeuron)::Float32 = neuron.activation
+Neuron.activation(neuron::SimpleNeuron)::Float32 = neuron.activation
 
-counter(neuron::SimpleNeuron)::UInt = 1
+Neuron.counter(neuron::SimpleNeuron)::UInt = 1
 
-function definedneurons(neuron::SimpleNeuron)::Dict{NeuronID, AnyNeuron}
+function Neuron.definedneurons(neuron::SimpleNeuron)::Dict{NeuronID, AnyNeuron}
     Dict{NeuronID, AnyNeuron}(
         map(
             x -> id(x) => x, filter(
@@ -34,7 +37,7 @@ function definedneurons(neuron::SimpleNeuron)::Dict{NeuronID, AnyNeuron}
     )
 end
 
-function definingneurons(neuron::SimpleNeuron)::Dict{NeuronID, AnyNeuron}
+function Neuron.definingneurons(neuron::SimpleNeuron)::Dict{NeuronID, AnyNeuron}
     Dict{NeuronID, AnyNeuron}(
         map(
             x -> id(x) => x, filter(
@@ -46,7 +49,7 @@ function definingneurons(neuron::SimpleNeuron)::Dict{NeuronID, AnyNeuron}
     )
 end
 
-function definingsensors(neuron::SimpleNeuron)::Dict{NeuronID, AnySensor}
+function Neuron.definingsensors(neuron::SimpleNeuron)::Dict{NeuronID, AnySensor}
     Dict{NeuronID, AnySensor}(
         map(
             x -> id(x) => x, filter(
@@ -58,7 +61,7 @@ function definingsensors(neuron::SimpleNeuron)::Dict{NeuronID, AnySensor}
     )
 end
 
-function activate!(
+function Neuron.activate!(
     neuron::SimpleNeuron, 
     signal::Float32, 
     spreadhorizonal::Bool, 
@@ -80,11 +83,11 @@ function activate!(
     defined
 end
 
-function explain(neuron::SimpleNeuron)::Dict{NeuronID, AnySensor}
+function Neuron.explain(neuron::SimpleNeuron)::Dict{NeuronID, AnySensor}
     definingsensors(neuron)
 end
 
-function explainone(
+function Neuron.explainone(
     neuron::SimpleNeuron, sensorname::Symbol
 )::Union{AnySensor, Nothing}
     for (id, sensor) in definingsensors(neuron)
@@ -95,7 +98,7 @@ function explainone(
     nothing
 end
 
-function deactivate!(
+function Neuron.deactivate!(
     neuron::SimpleNeuron, 
     spreadhorizonal::Bool, 
     spreadvertical::Bool
@@ -107,4 +110,6 @@ function deactivate!(
         end
     end
     nothing
+end
+
 end
