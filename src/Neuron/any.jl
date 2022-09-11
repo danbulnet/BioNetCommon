@@ -32,7 +32,7 @@ end
 
 function activate!(
     neuron::AnyNeuron, 
-    _signal::Float32, 
+    _signal::Real, 
     _spreadhorizonal::Bool, 
     _spreadvertical::Bool
 )::Dict{NeuronID, AnyNeuron}

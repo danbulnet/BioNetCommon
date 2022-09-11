@@ -22,7 +22,7 @@ Connection.from(connection::WeightedSequentialConnection)::AnyNeuron = connectio
 Connection.to(connection::WeightedSequentialConnection)::AnyNeuron = connection.to
 
 function ID.id(connection::WeightedSequentialConnection)::ConnectionID
-    ConnectionID(id(from(connection)), id(to(connection)))
+    ConnectionID(ID.id(Connection.from(connection)), ID.id(Connection.to(connection)))
 end
 
 Connection.weight(connection::WeightedSequentialConnection)::AnyNeuron = connection.weight

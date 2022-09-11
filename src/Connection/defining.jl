@@ -21,11 +21,11 @@ Connection.from(connection::SimpleDefiningConnection)::AnyNeuron = connection.fr
 Connection.to(connection::SimpleDefiningConnection)::AnyNeuron = connection.to
 
 function ID.id(connection::SimpleDefiningConnection)::ConnectionID
-    ConnectionID(id(from(connection)), id(to(connection)))
+    ConnectionID(ID.id(Connection.from(connection)), ID.id(Connection.to(connection)))
 end
 
 function Connection.weight(connection::SimpleDefiningConnection)::AnyNeuron
-    1.0f0 / counter(from(connection))
+    1.0f0 / Neuron.counter(Connection.from(connection))
 end
 
 mutable struct WeightedDefiningConnection <: AnyDefiningConnection 
@@ -39,7 +39,7 @@ Connection.from(connection::WeightedDefiningConnection)::AnyNeuron = connection.
 Connection.to(connection::WeightedDefiningConnection)::AnyNeuron = connection.to
 
 function ID.id(connection::WeightedDefiningConnection)::ConnectionID
-    ConnectionID(id(from(connection)), id(to(connection)))
+    ConnectionID(ID.id(Connection.from(connection)), ID.id(Connection.to(connection)))
 end
 
 Connection.weight(connection::WeightedDefiningConnection)::AnyNeuron = connection.weight

@@ -3,10 +3,6 @@ using Dates
 
 using BioNetCore
 
-@testset "BioNetCore" begin
-    @test BioNetCore isa Module
-end
-
 @testset "Data.distances" begin
     @test distance(1, 2) == 1.0f0
     @test distance(2, 1) == 1.0f0
@@ -53,10 +49,6 @@ end
     @test statqualia(Int) === Numerical()
 end
 
-@testset "Connection" begin
-    # @test from(AnyConnection)
-end
-
 @testset "Neuron" begin
     neuron1 = SimpleNeuron(:n1, :test)
     neuron2 = SimpleNeuron(:n2, :test)
@@ -66,4 +58,62 @@ end
 
     @test issensor(neuron1) == false
     @test issensor(neuron2) == false
+
+    @test activation(neuron1) == 0.0f0
+    @test activation(neuron1) == 0.0f0
+    
+    @test counter(neuron2) === UInt(1)
+    @test counter(neuron2) === UInt(1)
+    
+    @test isempty(definedneurons(neuron1))
+    @test isempty(definedneurons(neuron2))
+    @test isempty(definingneurons(neuron1))
+    @test isempty(definingneurons(neuron2))
+    @test isempty(definingsensors(neuron1))
+    @test isempty(definingsensors(neuron2))
+
+    define!(neuron1, neuron2)
+
+    @test length(definedneurons(neuron1)) == 1
+    @test length(definedneurons(neuron2)) == 0
+    @test length(definingneurons(neuron1)) == 0
+    @test length(definingneurons(neuron2)) == 1
+    @test length(definingsensors(neuron1)) == 0
+    @test length(definingsensors(neuron2)) == 0
+
+    @test length(explain(neuron1)) == 0
+    @test length(explain(neuron2)) == 1
+    @test first(first(explain(neuron2))) == id(neuron1)
+    @test id(last(first(explain(neuron2)))) == id(neuron1)
+    @test id(explainone(neuron2, :test)) == id(neuron1)
+
+    activate!(neuron1, 1.0, true, true)
+
+    @test activation(neuron1) == 1.0f0
+    @test activation(neuron2) == 1.0f0
+
+    deactivate!(neuron1, true, true)
+
+    @test activation(neuron1) == 0.0f0
+    @test activation(neuron2) == 0.0f0
+
+    activate!(neuron1, 1.0, false, false)
+
+    @test activation(neuron1) == 1.0f0
+    @test activation(neuron2) == 0.0f0
+
+    deactivate!(neuron1, true, true)
+
+    @test activation(neuron1) == 0.0f0
+    @test activation(neuron2) == 0.0f0
+
+    activate!(neuron1, 1.0, true, true)
+
+    @test activation(neuron1) == 1.0f0
+    @test activation(neuron2) == 1.0f0
+
+    deactivate!(neuron1, false, false)
+
+    @test activation(neuron1) == 0.0f0
+    @test activation(neuron2) == 1.0f0
 end

@@ -22,7 +22,7 @@ Connection.from(connection::WeightedInhibitoryConnection)::AnyNeuron = connectio
 Connection.to(connection::WeightedInhibitoryConnection)::AnyNeuron = connection.to
 
 function ID.id(connection::WeightedInhibitoryConnection)::ConnectionID
-    ConnectionID(id(from(connection)), id(to(connection)))
+    ConnectionID(ID.id(Connection.from(connection)), ID.id(Connection.to(connection)))
 end
 
 Connection.weight(connection::WeightedInhibitoryConnection)::AnyNeuron = connection.weight

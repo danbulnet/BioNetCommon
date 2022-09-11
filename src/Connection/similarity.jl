@@ -22,7 +22,7 @@ Connection.from(connection::WeightedSimilarityConnection)::AnyNeuron = connectio
 Connection.to(connection::WeightedSimilarityConnection)::AnyNeuron = connection.to
 
 function ID.id(connection::WeightedSimilarityConnection)::ConnectionID
-    ConnectionID(id(from(connection)), id(to(connection)))
+    ConnectionID(ID.id(Connection.from(connection)), ID.id(Connection.to(connection)))
 end
 
 Connection.weight(connection::WeightedSimilarityConnection)::AnyNeuron = connection.weight
