@@ -65,8 +65,22 @@ function connectto!(neuron::AnyNeuron, _to::AnyNeuron)::AnyConnection
     error("no connectto!(neuron, ...) implementation for $(typeof(neuron))")
 end
 
+function connectto!(neuron::AnyNeuron, connection::AnyConnection)::AnyConnection
+    error(
+        "no connectto!(neuron, connection) implementation for ", 
+        "($(typeof(neuron)), $(typeof(connection)))"
+    )
+end
+
 function connectfrom!(neuron::AnyNeuron, _from::AnyNeuron)::AnyConnection
     error("no connectfrom!(neuron, ...) implementation for $(typeof(neuron))")
+end
+
+function connectfrom!(neuron::AnyNeuron, connection::AnyConnection)::AnyConnection
+    error(
+        "no connectfrom!(neuron, connection) implementation for ", 
+        "($(typeof(neuron)), $(typeof(connection)))"
+    )
 end
 
 function Base.show(io::IO, neuron::AnyNeuron)

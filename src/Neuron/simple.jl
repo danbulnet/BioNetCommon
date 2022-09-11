@@ -121,10 +121,26 @@ function Neuron.connectto!(
     connection
 end
 
+function Neuron.connectto!(
+    neuron::SimpleNeuron, connection::SimpleDefiningConnection
+)::SimpleDefiningConnection
+    @assert connection.from === neuron
+    push!(neuon.definitions2other, id(connection) => connection)
+    connection
+end
+
 function Neuron.connectfrom!(
     neuron::SimpleNeuron, from::AnyNeuron
 )::SimpleDefiningConnection
     connection = SimpleDefiningConnection(from, neuron)
+    push!(neuon.definitions2self, id(connection) => connection)
+    connection
+end
+
+function Neuron.connectfrom!(
+    neuron::SimpleNeuron, connection::SimpleDefiningConnection
+)::SimpleDefiningConnection
+    @assert connection.to === neuron
     push!(neuon.definitions2self, id(connection) => connection)
     connection
 end
