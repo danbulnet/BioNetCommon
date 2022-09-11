@@ -1,12 +1,14 @@
-export InhibitoryConnection, WeightedInhibitoryConnection
+export WeightedInhibitoryConnection
 
-import BioNetCore.Data: AnyNeuron, ConnectionID
+import BioNetCore.Abstraction: AnyNeuron, AnyInhibitoryConnection
+import BioNetCore.ID: ConnectionID
+import BioNetCore.Connection
 
-abstract type InhibitoryConnection <: AnyConnection end
+function Connection.kind(_connection::AnyInhibitoryConnection)::ConnectionKind
+    ConnectionKind::Inhibitory
+end
 
-Connection.kind(connection::InhibitoryConnection)::ConnectionKind = ConnectionKind::Inhibitory
-
-mutable struct WeightedInhibitoryConnection <: DefiningConnection 
+mutable struct WeightedInhibitoryConnection <: AnyInhibitoryConnection 
     from::AnyNeuron
     to::AnyNeuron
     weight::Float32

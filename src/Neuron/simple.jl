@@ -2,8 +2,9 @@ module Simple
 
 export SimpleNeuron
 
-import BioNetCore.Data: AnyNeuron, AnySensor, NeuronID, ConnectionID
+import BioNetCore.Abstraction: AnyNeuron, AnySensor
 import BioNetCore.Connection: SimpleDefiningConnection
+import BioNetCore.ID: NeuronID, ConnectionID
 import BioNetCore.Neuron
 
 mutable struct SimpleNeuron

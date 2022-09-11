@@ -1,12 +1,14 @@
-export SequentialConnection, WeightedSequentialConnection
+export WeightedSequentialConnection
 
-import BioNetCore.Data: AnyNeuron, ConnectionID
+import BioNetCore.Abstraction: AnyNeuron, AnySequentialConnection
+import BioNetCore.ID: ConnectionID
+import BioNetCore.Connection
 
-abstract type SequentialConnection <: AnyConnection end
+function Connection.kind(_connection::AnySequentialConnection)::ConnectionKind
+    ConnectionKind::Sequential
+end
 
-Connection.kind(connection::SequentialConnection)::ConnectionKind = ConnectionKind::Sequential
-
-mutable struct WeightedSequentialConnection <: DefiningConnection 
+mutable struct WeightedSequentialConnection <: AnySequentialConnection 
     from::AnyNeuron
     to::AnyNeuron
     weight::Float32
