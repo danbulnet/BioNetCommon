@@ -1,6 +1,6 @@
 export SimpleSimilarityConnection, WeightedSimilarityConnection
 
-import BioNetCommon.Data: AnyNeuron, ConnectionID
+import BioNetCore.Data: AnyNeuron, ConnectionID
 
 mutable struct WeightedSimilarityConnection <: DefiningConnection 
     from::AnyNeuron

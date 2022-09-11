@@ -1,1 +1,1 @@
-using Revise; using BioNetCommon;
+using Revise; using BioNetCore;

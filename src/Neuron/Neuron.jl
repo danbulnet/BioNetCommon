@@ -2,7 +2,7 @@ module Neuron
 
 export NeuronState
 
-import BioNetCommon.Data: AnyNeuron, NeuronID
+import BioNetCore.Data: AnyNeuron, NeuronID
 
 @enum NeuronState begin
     active
@@ -27,16 +27,25 @@ function counter(neuron::AnyNeuron)::UInt
     error("no counter(neuron) implementation for $(typeof(neuron))")
 end
 
-function definedneurons(neuron::AnyNeuron)::Vector{AnyNeuron}
+function definedneurons(neuron::AnyNeuron)::Dict{NeuronID, AnyNeuron}
     error("no definedneurons(neuron) implementation for $(typeof(neuron))")
 end
 
-function definingneurons(neuron::AnyNeuron)::Vector{AnyNeuron}
+function definingneurons(neuron::AnyNeuron)::Dict{NeuronID, AnyNeuron}
     error("no definingneurons(neuron) implementation for $(typeof(neuron))")
 end
 
-function definingsensors(neuron::AnyNeuron)::Vector{AnyNeuron}
+function definingsensors(neuron::AnyNeuron)::Dict{NeuronID, AnyNeuron}
     error("no definingsensors(neuron) implementation for $(typeof(neuron))")
+end
+
+function activate(
+    neuron::AnyNeuron, 
+    _signal::Float32, 
+    _spreadhorizonal::Bool, 
+    _spreadvertical::Bool
+)::Dict{NeuronID, AnyNeuron}
+    error("no activate(neuron, ...) implementation for $(typeof(neuron))")
 end
 
 function Base.show(io::IO, neuron::AnyNeuron)

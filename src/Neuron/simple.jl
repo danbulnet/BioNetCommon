@@ -1,7 +1,7 @@
 export SimpleNeuron
 
-import BioNetCommon.Data: NeuronID, ConnectionID
-import BioNetCommon.Connection: SimpleDefiningConnection
+import BioNetCore.Data: NeuronID, ConnectionID
+import BioNetCore.Connection: SimpleDefiningConnection
 
 mutable struct SimpleNeuron
     id::NeuronID
@@ -22,14 +22,60 @@ activation(neuron::SimpleNeuron)::Float32 = neuron.activation
 
 counter(neuron::SimpleNeuron)::UInt = 1
 
-function definedneurons(neuron::SimpleNeuron)::Vector{AnyNeuron}
-    filter(x -> !issensor(x), map(to, values(neuron.definitions2other)))
+function definedneurons(neuron::SimpleNeuron)::Dict{NeuronID, AnyNeuron}
+    Dict{NeuronID, AnyNeuron}(
+        map(
+            x -> id(x) => x, filter(
+                x -> !issensor(x), map(
+                    to, values(neuron.definitions2other)
+                )
+            )
+        )
+    )
 end
 
-function definingneurons(neuron::SimpleNeuron)::Vector{AnyNeuron}
-    filter(x -> !issensor(x), map(from, values(neuron.definitions2self)))
+function definingneurons(neuron::SimpleNeuron)::Dict{NeuronID, AnyNeuron}
+    Dict{NeuronID, AnyNeuron}(
+        map(
+            x -> id(x) => x, filter(
+                x -> !issensor(x), map(
+                    from, values(neuron.definitions2self)
+                )
+            )
+        )
+    )
 end
 
-function definingsensors(neuron::SimpleNeuron)::Vector{AnyNeuron}
-    filter(issensor, map(from, values(neuron.definitions2self)))
+function definingsensors(neuron::SimpleNeuron)::Dict{NeuronID, AnyNeuron}
+    Dict{NeuronID, AnyNeuron}(
+        map(
+            x -> id(x) => x, filter(
+                x -> issensor(x), map(
+                    from, values(neuron.definitions2self)
+                )
+            )
+        )
+    )
+end
+
+function activate(
+    neuron::SimpleNeuron, 
+    signal::Float32, 
+    spreadhorizonal::Bool, 
+    spreadvertical::Bool
+)::Dict{NeuronID, AnyNeuron}
+    neuron.activation += signal
+
+    defined = definedneurons(neuron)
+
+    if spreadvertical
+        for definedneuron in values(defined)
+            defined = merge!(
+                defined, 
+                activate(definedneuron, signal, spreadhorizonal, spreadvertical)
+            )
+        end
+    end
+
+    defined
 end

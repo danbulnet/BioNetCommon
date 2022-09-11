@@ -1,6 +1,6 @@
 export SimpleDefiningConnection, WeightedDefiningConnection
 
-import BioNetCommon.Data: AnyNeuron, ConnectionID
+import BioNetCore.Data: AnyNeuron, ConnectionID
 
 struct SimpleDefiningConnection <: DefiningConnection 
     from::AnyNeuron

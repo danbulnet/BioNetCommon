@@ -1,10 +1,10 @@
 using Test
 using Dates
 
-using BioNetCommon
+using BioNetCore
 
-@testset "BioNetCommon" begin
-    @test BioNetCommon isa Module
+@testset "BioNetCore" begin
+    @test BioNetCore isa Module
 end
 
 @testset "Data.distances" begin

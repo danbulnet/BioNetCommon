@@ -6,7 +6,7 @@ export InhibitoryConnection
 export SequentialConnection
 export from, to, id, weight, kind
 
-import BioNetCommon.Data: AnyConnection, AnyNeuron, NeuronID, ConnectionID
+import BioNetCore.Data: AnyConnection, AnyNeuron, NeuronID, ConnectionID
 
 abstract type DefiningConnection <: AnyConnection end
 abstract type SimilarityConnection <: AnyConnection end

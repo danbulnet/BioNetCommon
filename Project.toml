@@ -1,4 +1,4 @@
-name = "BioNetCommon"
+name = "BioNetCore"
 uuid = "bdbc5022-c54b-4a14-a677-079597bdff06"
 authors = ["danbulnet <daniel@bulanda.net>"]
 version = "0.1.0"
