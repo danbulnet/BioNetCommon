@@ -113,7 +113,7 @@ function Neuron.deactivate!(
     nothing
 end
 
-function Neuron.connectto!(
+function Neuron.defineto!(
     neuron::SimpleNeuron, to::AnyNeuron
 )::SimpleDefiningConnection
     connection = SimpleDefiningConnection(neuron, to)
@@ -121,7 +121,7 @@ function Neuron.connectto!(
     connection
 end
 
-function Neuron.connectto!(
+function Neuron.defineto!(
     neuron::SimpleNeuron, connection::SimpleDefiningConnection
 )::SimpleDefiningConnection
     @assert connection.from === neuron
@@ -129,7 +129,7 @@ function Neuron.connectto!(
     connection
 end
 
-function Neuron.connectfrom!(
+function Neuron.definefrom!(
     neuron::SimpleNeuron, from::AnyNeuron
 )::SimpleDefiningConnection
     connection = SimpleDefiningConnection(from, neuron)
@@ -137,11 +137,23 @@ function Neuron.connectfrom!(
     connection
 end
 
-function Neuron.connectfrom!(
+function Neuron.definefrom!(
     neuron::SimpleNeuron, connection::SimpleDefiningConnection
 )::SimpleDefiningConnection
     @assert connection.to === neuron
     push!(neuon.definitions2self, id(connection) => connection)
+    connection
+end
+
+function define!(from::SimpleNeuron, to::SimpleNeuron)::SimpleDefiningConnection
+    connection = defineto!(from, to)
+    definefrom!(to, connection)
+    connection
+end
+
+function define!(from::AnySensor, to::SimpleNeuron)::SimpleDefiningConnection
+    connection = definefrom!(to, from)
+    defineto!(from, connection)
     connection
 end
 

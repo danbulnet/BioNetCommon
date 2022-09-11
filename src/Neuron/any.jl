@@ -1,7 +1,7 @@
 export id, issensor, activation, counter
 export definedneurons, definingneurons, definingsensors
 export activate!, explain, explainone, deactivate!
-export connectto!, connectfrom!
+export define!, defineto!, definefrom!
 
 import BioNetCore.Abstraction: AnyConnection, AnyNeuron
 import BioNetCore.ID: NeuronID
@@ -61,25 +61,32 @@ function deactivate!(
     error("no deactivate!(neuron, ...) implementation for $(typeof(neuron))")
 end
 
-function connectto!(neuron::AnyNeuron, _to::AnyNeuron)::AnyConnection
-    error("no connectto!(neuron, ...) implementation for $(typeof(neuron))")
+function defineto!(neuron::AnyNeuron, _to::AnyNeuron)::AnyConnection
+    error("no defineto!(neuron, ...) implementation for $(typeof(neuron))")
 end
 
-function connectto!(neuron::AnyNeuron, connection::AnyConnection)::AnyConnection
+function defineto!(neuron::AnyNeuron, connection::AnyConnection)::AnyConnection
     error(
-        "no connectto!(neuron, connection) implementation for ", 
+        "no defineto!(neuron, connection) implementation for ", 
         "($(typeof(neuron)), $(typeof(connection)))"
     )
 end
 
-function connectfrom!(neuron::AnyNeuron, _from::AnyNeuron)::AnyConnection
-    error("no connectfrom!(neuron, ...) implementation for $(typeof(neuron))")
+function definefrom!(neuron::AnyNeuron, _from::AnyNeuron)::AnyConnection
+    error("no definefrom!(neuron, ...) implementation for $(typeof(neuron))")
 end
 
-function connectfrom!(neuron::AnyNeuron, connection::AnyConnection)::AnyConnection
+function definefrom!(neuron::AnyNeuron, connection::AnyConnection)::AnyConnection
     error(
-        "no connectfrom!(neuron, connection) implementation for ", 
+        "no definefrom!(neuron, connection) implementation for ", 
         "($(typeof(neuron)), $(typeof(connection)))"
+    )
+end
+
+function define!(from::AnyNeuron, to::AnyNeuron)::AnyConnection
+    error(
+        "no define!(neuron, neuron) implementation for ", 
+        "($(typeof(from)), $(typeof(to)))"
     )
 end
 
