@@ -21,3 +21,15 @@ issensor(neuron::SimpleNeuron)::Bool = false
 activation(neuron::SimpleNeuron)::Float32 = neuron.activation
 
 counter(neuron::SimpleNeuron)::UInt = 1
+
+function definedneurons(neuron::SimpleNeuron)::Vector{AnyNeuron}
+    filter(x -> !issensor(x), map(to, values(neuron.definitions2other)))
+end
+
+function definingneurons(neuron::SimpleNeuron)::Vector{AnyNeuron}
+    filter(x -> !issensor(x), map(from, values(neuron.definitions2self)))
+end
+
+function definingsensors(neuron::SimpleNeuron)::Vector{AnyNeuron}
+    filter(issensor, map(from, values(neuron.definitions2self)))
+end

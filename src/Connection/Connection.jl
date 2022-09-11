@@ -27,19 +27,19 @@ include("inhibitory.jl")
 include("sequential.jl")
 
 function from(connection::AnyConnection)::AnyNeuron
-    error("no from(connection) implementation for: $connection")
+    error("no from(connection) implementation for $(typeof(connection))")
 end
 
 function to(connection::AnyConnection)::AnyNeuron
-    error("no to(connection) implementation for: $connection")
+    error("no to(connection) implementation for $(typeof(connection))")
 end
 
 function id(connection::AnyConnection)::ConnectionID
-    error("no id(connection) implementation for: $connection")
+    error("no id(connection) implementation for $(typeof(connection))")
 end
 
 function weight(connection::AnyConnection)::Float32
-    error("no weight(connection) implementation for: $connection")
+    error("no weight(connection) implementation for $(typeof(connection))")
 end
 
 kind(connection::AnyConnection)::ConnectionKind = ConnectionKind::Unknown
