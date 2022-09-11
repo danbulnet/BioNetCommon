@@ -14,6 +14,10 @@ mutable struct SimpleNeuron
     end
 end
 
-id(neuron::AnyNeuron) = "todo" # TODO
+id(neuron::SimpleNeuron)::NeuronID = neuron.id
 
-counter(neuron::AnyNeuron) = 1 # TODO
+issensor(neuron::SimpleNeuron)::Bool = false
+
+activation(neuron::SimpleNeuron)::Float32 = neuron.activation
+
+counter(neuron::SimpleNeuron)::UInt = 1

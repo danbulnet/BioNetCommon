@@ -49,9 +49,9 @@ kind(connection::InhibitoryConnection)::ConnectionKind = ConnectionKind::Inhibit
 kind(connection::SequentialConnection)::ConnectionKind = ConnectionKind::Sequential
 
 function Base.show(io::IO, connection::AnyConnection)
-    println(
-        name(connection.from), " => ", name(connection.to), 
-        " [w:", round.(connection.weight; digits=5), "]"
+    print(
+        "{", id(connection), 
+        "|w:", round.(connection.weight; digits=5), "}"
     )
 end
 
