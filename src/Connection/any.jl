@@ -1,7 +1,12 @@
 export from, to, weight, kind
 
 import BioNetCore.Abstraction: AnyConnection, AnyNeuron
+import BioNetCore.ID
 import BioNetCore.ID: ConnectionID
+
+function ID.id(connection::AnyConnection)::ConnectionID
+    error("no id(connection) implementation for $(typeof(connection))")
+end
 
 function from(connection::AnyConnection)::AnyNeuron
     error("no from(connection) implementation for $(typeof(connection))")
